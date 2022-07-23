@@ -2,7 +2,7 @@ import { ActionFunction, json, LoaderFunction, redirect } from "@remix-run/node"
 import invariant from "tiny-invariant";
 import { getPost, Post, updatePost } from "~/models/post.server";
 import { PostActionData } from "~/routes/posts/admin/new";
-import { useActionData, useLoaderData } from "@remix-run/react";
+import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
 import { PostEntryForm } from "~/routes/posts/admin/post-entry-form";
 
 
@@ -57,7 +57,10 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function EditPost() {
   const errors = useActionData();
   const { post } = useLoaderData<typeof loader>() as LoaderData;
+  console.log('post update via useLoaderData in edit post,', post)
+  const transition = useTransition();
+  const isUpdating = Boolean(transition.submission);
   return(
-    <PostEntryForm formErrors={errors} post={post}/>
+    <PostEntryForm formErrors={errors} post={post} isUpdating={isUpdating}/>
   );
 }
