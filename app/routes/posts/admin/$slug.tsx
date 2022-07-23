@@ -60,6 +60,8 @@ export default function EditPost() {
   console.log('post update via useLoaderData in edit post,', post)
   const transition = useTransition();
   const isUpdating = Boolean(transition.submission);
+
+
   return(
     <PostEntryForm formErrors={errors} post={post} isUpdating={isUpdating}/>
   );

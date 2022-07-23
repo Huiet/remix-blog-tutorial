@@ -1,7 +1,6 @@
 import { Form } from "@remix-run/react";
 import { PostActionData } from "~/routes/posts/admin/new";
 import { Post } from "@prisma/client";
-import { useEffect, useState } from "react";
 
 type Props = {
   formErrors: PostActionData;
@@ -12,8 +11,19 @@ type Props = {
 const inputClassName = `w-full rounded border border-gray-500 px-2 py-1 text-lg`;
 
 export function PostEntryForm(props: Props) {
-  console.log('Re Rendering postEntryForm', props.post?.slug);
+  //const { formErrors, isUpdating, post } = props;
+  // const { formErrors, post } = props;
+  // const [isUpdating, setIsUpdating] = useState(props.isUpdating)
+  // useEffect(() => {
+  //   setIsUpdating(props.isUpdating);
+  // }, [props.isUpdating])
+// const [post, setPost] = useState(props.post);
+  // useEffect(() => {
+  //   setPost(props.post);
+  // }, [props.post]);
+
   const { formErrors, isUpdating, post } = props;
+
 
   return (
     <Form method="post">
@@ -24,12 +34,14 @@ export function PostEntryForm(props: Props) {
             {formErrors?.title ? (
               <em className="text-red-600">{formErrors.title}</em>
             ) : null}
-            <input
-              type="text"
-              name="title"
-              defaultValue={post?.title}
-              className={inputClassName}
-            />
+            <span key={post?.title}>
+              <input
+                type="text"
+                name="title"
+                defaultValue={post?.title}
+                className={inputClassName}
+              />
+            </span>
           </label>
         </p>
         <p>
@@ -38,12 +50,14 @@ export function PostEntryForm(props: Props) {
             {formErrors?.slug ? (
               <em className="text-red-600">{formErrors.slug}</em>
             ) : null}
+            <span key={post?.slug}>
             <input
               type="text"
               name="slug"
               defaultValue={post?.slug}
               className={inputClassName}
             />
+            </span>
           </label>
         </p>
         <p>
@@ -55,6 +69,7 @@ export function PostEntryForm(props: Props) {
             ) : null}
           </label>
           <br />
+          <span key={post?.markdown}>
           <textarea
             id="markdown"
             rows={20}
@@ -62,6 +77,7 @@ export function PostEntryForm(props: Props) {
             defaultValue={post?.markdown}
             className={`${inputClassName} font-mono`}
           />
+          </span>
         </p>
         <p className="text-right">
           <button
