@@ -9,7 +9,6 @@ type LoaderData = {
 
 export default function Posts() {
   const { posts } = useLoaderData<LoaderData>();
-  console.log(posts);
   return (
     <main>
       <h1>Posts</h1>
