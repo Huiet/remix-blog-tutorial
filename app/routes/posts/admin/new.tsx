@@ -60,9 +60,8 @@ export default function NewPost() {
   const errors = useActionData();
 
   const transition = useTransition();
-  const isUpdating = Boolean(transition.submission);
 
   return (
-    <PostEntryForm formErrors={errors} isUpdating={isUpdating} />
+    <PostEntryForm formErrors={errors} transitionState={transition.state} />
   );
 }

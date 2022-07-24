@@ -57,12 +57,11 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function EditPost() {
   const errors = useActionData();
   const { post } = useLoaderData<typeof loader>() as LoaderData;
-  console.log('post update via useLoaderData in edit post,', post)
-  const transition = useTransition();
-  const isUpdating = Boolean(transition.submission);
-
+  const transition = useTransition(); // for showing loading
 
   return(
-    <PostEntryForm formErrors={errors} post={post} isUpdating={isUpdating}/>
+    <>
+    <PostEntryForm formErrors={errors} post={post} transitionState={transition.state}/>
+    </>
   );
 }
