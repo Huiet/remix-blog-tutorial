@@ -11,6 +11,7 @@ import {
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
+import { Navigation } from "~/components/navigation";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -18,7 +19,7 @@ export const links: LinksFunction = () => {
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Remix Notes",
+  title: "Remix App",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -27,20 +28,71 @@ export async function loader({ request }: LoaderArgs) {
     user: await getUser(request),
   });
 }
-
 export default function App() {
   return (
-    <html lang="en" className="h-full">
-      <head>
-        <Meta />
-        <Links />
-      </head>
-      <body className="h-full dark:bg-bodyDark dark:text-textDark">
+    <Document>
+      <Layout>
         <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
-    </html>
-  );
+      </Layout>
+    </Document>
+  )
 }
+
+export function Document({ children }) {
+  return (
+    <html lang="en">
+    <head>
+      <Meta />
+      <Links />
+    </head>
+    <body className="h-full dark:bg-bodyDark dark:text-textDark">
+      {children}
+      <ScrollRestoration />
+      <Scripts />
+      <LiveReload />
+    {/*Enable live reload in development environment only, not production */}
+    {/*{process.env.NODE_ENV === 'development' ? <LiveReload /> : null}*/}
+    </body>
+    </html>
+  )
+}
+
+
+export function Layout({ children }) {
+  return (
+    <>
+      <Navigation />
+      {children}
+    </>
+  )
+}
+
+
+export function ErrorBoundary({ error }) {
+  console.log(error)
+  return (
+    <Document>
+      <Layout>
+        <h1>There was an Error</h1>
+        <p>{error.message}</p>
+      </Layout>
+    </Document>
+  )
+}
+
+// export default function App() {
+//   return (
+//     <html lang="en" className="h-full">
+//       <head>
+//         <Meta />
+//         <Links />
+//       </head>
+//       <body className="h-full dark:bg-bodyDark dark:text-textDark">
+//         <Outlet />
+//         <ScrollRestoration />
+//         <Scripts />
+//         <LiveReload />
+//       </body>
+//     </html>
+//   );
+// }
