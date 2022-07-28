@@ -1,5 +1,5 @@
 import { Form } from "@remix-run/react";
-import { PostActionData } from "~/routes/posts/admin/new";
+import { PostActionData } from "~/routes/admin/new";
 import { Post } from "@prisma/client";
 
 type Props = {

@@ -10,11 +10,12 @@ type LoaderData = {
 export default function Posts() {
   const { posts } = useLoaderData<LoaderData>();
   return (
-    <main>
-      <h1>Posts</h1>
-      <Link to="admin" className="text-red-600 underline">
-        Admin
-      </Link>
+    <main className="flex justify-center mt-8">
+      <div className="flex-col gap-4">
+
+
+      <h1 className="text-lg">Posts</h1>
+
       <ul>
         { posts.map((post) => (
           <li key={post.slug}>
@@ -27,6 +28,7 @@ export default function Posts() {
           </li>
         ))}
       </ul>
+      </div>
     </main>
   )
 }

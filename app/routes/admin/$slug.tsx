@@ -1,9 +1,9 @@
 import { ActionFunction, json, LoaderFunction, redirect } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { getPost, Post, updatePost } from "~/models/post.server";
-import { PostActionData } from "~/routes/posts/admin/new";
+import { PostActionData } from "~/routes/admin/new";
 import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
-import { PostEntryForm } from "~/routes/posts/admin/post-entry-form";
+import { PostEntryForm } from "~/routes/admin/post-entry-form";
 
 
 export const action: ActionFunction = async ({ request }) => {

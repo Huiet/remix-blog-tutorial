@@ -74,7 +74,7 @@ export function ErrorBoundary({ error }) {
     <Document>
       <Layout>
         <h1>There was an Error</h1>
-        <p>{error.message}</p>
+        <p>{error?.message}</p>
       </Layout>
     </Document>
   )

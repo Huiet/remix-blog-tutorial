@@ -3,7 +3,7 @@ import { Form, useActionData, useTransition } from "@remix-run/react";
 
 import { createPost } from "~/models/post.server";
 import invariant from "tiny-invariant";
-import { PostEntryForm } from "~/routes/posts/admin/post-entry-form";
+import { PostEntryForm } from "~/routes/admin/post-entry-form";
 
 export type PostActionData =
   | {
@@ -19,6 +19,7 @@ export const action: ActionFunction = async ({ request }) => {
   const title = formData.get("title");
   const slug = formData.get("slug");
   const markdown = formData.get("markdown");
+
 
   const errors: PostActionData = {
     title: title ? null : "Title is required",
@@ -64,4 +65,16 @@ export default function NewPost() {
   return (
     <PostEntryForm formErrors={errors} transitionState={transition.state} />
   );
+}
+
+
+export function ErrorBoundary({ error }) {
+  console.log(error)
+  // todo: make pretty error
+  return (
+    <>
+      <h1>Error with posts</h1>
+      <p>{error?.message}</p>
+    </>
+  )
 }
