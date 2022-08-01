@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "@remix-run/react";
 
-export function Navigation() {
+export function GlobalNav() {
   const [navbar, setNavbar] = useState(false);
 
   return (

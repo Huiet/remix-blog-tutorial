@@ -1,11 +1,14 @@
 import { Link } from "@remix-run/react";
 
 import { useOptionalUser } from "~/utils";
+import PreviewCard from "~/components/PreviewCard";
 
 export default function Index() {
   const user = useOptionalUser();
   return (
     <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
+      todo: get post data to show cards
+      <PreviewCard  title={'Yes'} message={'this is a message for the card'} />
       <div className="relative sm:pb-16 sm:pt-8">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">

@@ -11,7 +11,7 @@ import {
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
-import { Navigation } from "~/components/navigation";
+import { GlobalNav } from "~/components/GlobalNav";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -61,7 +61,7 @@ export function Document({ children }) {
 export function Layout({ children }) {
   return (
     <>
-      <Navigation />
+      <GlobalNav />
       {children}
     </>
   )
