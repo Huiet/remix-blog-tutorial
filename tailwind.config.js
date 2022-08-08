@@ -5,6 +5,7 @@ const colors = require('tailwindcss/colors')
 
 module.exports = {
   content: ["./app/**/*.{ts,tsx,jsx,js}"],
+  plugins: [require('daisyui')],
   theme: {
     extend: {
       colors: {
@@ -45,5 +46,4 @@ module.exports = {
       }
     },
   },
-  plugins: [],
 };

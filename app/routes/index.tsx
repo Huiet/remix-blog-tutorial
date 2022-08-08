@@ -6,7 +6,7 @@ import PreviewCard from "~/components/PreviewCard";
 export default function Index() {
   const user = useOptionalUser();
   return (
-    <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
+    <main className="relative min-h-screen sm:flex sm:items-center sm:justify-center">
       todo: get post data to show cards
       <PreviewCard  title={'Yes'} message={'this is a message for the card'} />
       <div className="relative sm:pb-16 sm:pt-8">
