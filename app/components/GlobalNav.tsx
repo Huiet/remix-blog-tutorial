@@ -64,6 +64,9 @@ export function GlobalNav() {
                 <Link to="/admin">Admin</Link>
               </li>
               <li className="text-gray-600 hover:text-blue-600">
+                <Link to="/trivia">Trivia</Link>
+              </li>
+              <li className="text-gray-600 hover:text-blue-600">
                 <Link to="/todo">More to come</Link>
               </li>
             </ul>
