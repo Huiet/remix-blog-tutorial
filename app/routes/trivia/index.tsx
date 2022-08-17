@@ -30,8 +30,6 @@ export default function Trivia() {
         : 1)
   }
 
-
-  console.log("posts", categories);
   return (
     <main className="flex justify-center mt-8">
       <Form method={"post"}>
@@ -80,7 +78,8 @@ const QuestionSchema = z.object({
   difficulty: z.literal('easy') || z.literal('medium') || z.literal('hard'),
   question: z.string(),
   correct_answer: z.string(),
-  incorrect_answers: z.array(z.string())
+  incorrect_answers: z.array(z.string()),
+  answers: z.array(z.string())
 })
 
 export type Question = z.infer<typeof QuestionSchema>;

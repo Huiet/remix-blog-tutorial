@@ -19,11 +19,22 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   if (id) apiUrl += `&category=${id}`;
   const questions: Question[] = (await (await fetch(apiUrl)).json())?.results || [];
 
-  //
-  // console.log('qs', questions);
-  // // const apiCount = count ? (count > 50 ? 50 : count <= 0: 1 : count : 1;
-  // console.log('count', count);
-  console.log("cat", params.category);
+  function shuffle(array: any[]) {
+    let currentIndex = array.length,  randomIndex;
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+    return array;
+  }
+  questions.map(question => {
+    question.answers = shuffle([...question.incorrect_answers, question.correct_answer]);
+  })
   return json<LoaderData>({ category: params.category || null, questions: questions });
 };
 
@@ -33,12 +44,11 @@ export default function TriviaCategory() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
 
-  console.log("mmhmm", category, questions);
-
-
-  const handleQuestionUpdate = (value) => {
-    setCurrentQuestion(value);
-  };
+  const onAnswer = (correct: boolean) => {
+    if (correct) setCorrectAnswers(correctAnswers + 1);
+    setCurrentQuestion(currentQuestion + 1);
+    // todo: deal with end of questions
+  }
 
   return (
     <>
@@ -49,27 +59,13 @@ export default function TriviaCategory() {
           correct_answer={questions[currentQuestion].correct_answer}
           incorrect_answers={questions[currentQuestion].incorrect_answers}
           type={questions[currentQuestion].type}
-          difficulty={questions[currentQuestion].difficulty} />
+          difficulty={questions[currentQuestion].difficulty}
+          answers={questions[currentQuestion].answers}
+          onAnswer={onAnswer}/>
       </main>
     </>
   );
 
 }
-
-
-// {
-//   questions.map(x =>
-// ("foo");
-// )
-//   questions.map(question => (
-//     // <QuestionCard {...question} />
-//     <QuestionCard
-//       question={question.question}
-//       correct_answer={question.correct_answer}
-//       incorrect_answers={question.incorrect_answers}
-//       type={question.type}
-//       difficulty={question.difficulty} />
-//   ))
-// }
 
 type LoaderData = { questions: Question[] } & { category: string | null }

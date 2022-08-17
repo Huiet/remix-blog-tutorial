@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { f } from "msw/lib/glossary-297d38ba";
 
 QuestionCard.propTypes = {
   question: PropTypes.string,
@@ -7,6 +8,8 @@ QuestionCard.propTypes = {
   incorrect_answers: PropTypes.arrayOf(PropTypes.string),
   type: PropTypes.string,
   difficulty: PropTypes.string,
+  answers: PropTypes.arrayOf(PropTypes.string),
+  onAnswer: PropTypes.func
 };
 
 interface questionProps {
@@ -15,22 +18,38 @@ interface questionProps {
   incorrect_answers: string[];
   type: string;
   difficulty: string;
+  answers: string[];
+  onAnswer: (correctAnswer: boolean) => any;
 }
 
-function QuestionCard({question, correct_answer, incorrect_answers, type, difficulty}: questionProps) {
-  console.log('cardly');
+function QuestionCard({ question, correct_answer, incorrect_answers, type, difficulty, onAnswer, answers }: questionProps) {
+
+
+
+
+  const handleAnswer = (e: any) => {
+    console.log("e", e, e.target.value);
+    console.log("correct_answer", correct_answer, e.target.value === correct_answer);
+    // return onAnswer(e.target.value === correct_answer)
+  };
   return (
     <div>
-      {type === 'boolean' &&
-      <div className="flex w-full">
-        <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">True</div>
+      <h3 className="text-xl place-items-center" dangerouslySetInnerHTML={{ __html: question }}>
+      </h3>
+      {type === "boolean" &&
+      <div className="flex w-full justify-center gap-4 mt-10">
+        <input type={"button"} className={"btn btn-accent"} value="true" onClick={handleAnswer} />
         <div className="divider divider-horizontal">OR</div>
-        <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">False</div>
+        <input type={"button"} className={"btn btn-accent"} value="false" onClick={handleAnswer} />
       </div>
       }
 
-      {type === 'multiple' &&
-        'todo: multiple'
+      {type === "multiple" &&
+      <div className="flex flex-col w-full align-center gap-2 mt-10 items-center">
+        {answers.map(answer => (
+          <input key={answer} type={"button"} className="btn btn-accent w-full max-w-lg mx-4" value={answer} onClick={handleAnswer}/>
+        ))}
+      </div>
       }
 
 
