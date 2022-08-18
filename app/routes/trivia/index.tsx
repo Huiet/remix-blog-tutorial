@@ -10,16 +10,17 @@ export const loader = async () => {
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const category = formData.get("category");
-  const count = formData.get("count");
-  return redirect("/trivia/" + category + '?count='+count);
+  const category = formData.get('category');
+  const count = formData.get('count');
+  const difficulty = formData.get('difficulty')
+  return redirect("/trivia/" + category + '?count='+count + (difficulty ? `&difficulty=${difficulty}`: ''));
 };
 
 
 export default function Trivia() {
   const { categories } = useLoaderData<LoaderData>();
   const onError = true;
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(10);
 
 
   // restrict count between 1 and 50 to comply with the api
@@ -54,9 +55,18 @@ export default function Trivia() {
                  value={count}
                  onChange={handleCountChange}
             />
+
+          <label className="block text-lg mb-3" htmlFor="difficulty">Difficulty</label>
+          <select name="difficulty" className="select select-primary">
+              <option value={undefined}>Any</option>
+              <option value={'easy'}>Easy</option>
+              <option value={'medium'}>Medium</option>
+              <option value={'hard'}>Hard</option>
+          </select>
+
         </div>
 
-        <button className={"btn btn-primary"} type={"submit"}>Launch</button>
+        <button className={"btn btn-primary mt-8"} type={"submit"}>Launch</button>
       </Form>
     </main>
   );
@@ -74,8 +84,8 @@ export type Categories = z.infer<typeof categroiesSchema>;
 
 const QuestionSchema = z.object({
   category: z.string(),
-  type: z.literal('multiple') || z.literal('boolean'),
-  difficulty: z.literal('easy') || z.literal('medium') || z.literal('hard'),
+  type: z.union([z.literal('multiple'), z.literal('boolean')]),
+  difficulty: z.union([z.literal('easy'),z.literal('medium'), z.literal('hard')]),
   question: z.string(),
   correct_answer: z.string(),
   incorrect_answers: z.array(z.string()),
