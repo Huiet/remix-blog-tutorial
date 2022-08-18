@@ -49,7 +49,7 @@ export default function Trivia() {
                  htmlFor="count">
             Question count:
           </label>
-          <input className={"input input-accent mb-4"}
+          <input className={"input input-info mb-4"}
                  name="count"
                  type='number'
                  value={count}
@@ -57,7 +57,7 @@ export default function Trivia() {
             />
 
           <label className="block text-lg mb-3" htmlFor="difficulty">Difficulty</label>
-          <select name="difficulty" className="select select-primary">
+          <select name="difficulty" className="select select-primary select-accent">
               <option value={undefined}>Any</option>
               <option value={'easy'}>Easy</option>
               <option value={'medium'}>Medium</option>
