@@ -81,16 +81,15 @@ export default function TriviaCategory() {
 
   return (
     <>
-      <main className="grid place-items-center mt-8">
-        <div className={"flex justify-end text-lg gap-4 mt-5 mb-8 ml-8"}>
-          <span className="badge badge-lg">Question {currentQuestion + 1}/{questions.length}</span>
+      <main className="grid place-items-center mt-8 text-center">
+        <div className={"flex flex-wrap justify-center align-center text-lg gap-4 mt-5 mb-8"}>
+          <span className="badge badge-lg min-w-fit ">Question {currentQuestion + 1}/{questions.length}</span>
           <span
-            className={"badge badge-lg " + getDifficultyColor()}>Difficulty: {questions[currentQuestion].difficulty}</span>
+            className={"badge badge-lg min-w-fit " + getDifficultyColor()}>Difficulty: {questions[currentQuestion].difficulty}</span>
           <span
-            className="badge badge-lg">Total Correct: {correctAnswers}/{currentQuestion + (questionAnswered ? 1 : 0)}</span>
-
+            className="badge badge-lg min-w-fit">Total Correct: {correctAnswers}/{currentQuestion + (questionAnswered ? 1 : 0)}</span>
         </div>
-        <h1 className="text-xl mb-12">{questions[currentQuestion].category}</h1>
+        <h1 className="text-xl mb-12 mx-8">{questions[currentQuestion].category}</h1>
         <QuestionCard
           question={questions[currentQuestion].question}
           correct_answer={questions[currentQuestion].correct_answer}

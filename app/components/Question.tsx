@@ -33,21 +33,20 @@ function QuestionCard({ question, correct_answer, type, onAnswer, answers }: que
   };
 
   const isCorrectAnswer = (value: string) => {
-    return value == he.decode(correct_answer);
+    return value.toLowerCase() == he.decode(correct_answer).toLowerCase();
   }
-
   const styleButtons = (value: string) => {
     let btnClass = 'btn ';
     if(selectedAnswer) {
       btnClass += 'no-animation cursor-default '
       if(isCorrectAnswer(value)) {
         btnClass += 'btn-success ';
-        if(selectedAnswer !== value) {
+        if(selectedAnswer != value) {
           btnClass += 'btn-outline '
         }
       } else {
         btnClass += 'btn-error '
-        if(selectedAnswer !== value) {
+        if(selectedAnswer != value) {
           btnClass += 'btn-outline '
         }
       }
@@ -65,9 +64,9 @@ function QuestionCard({ question, correct_answer, type, onAnswer, answers }: que
 
       {type === "boolean" &&
       <div className="flex w-full justify-center align-center gap-4 mt-10">
-        <input type={"button"} className={styleButtons('True')} value="true" onClick={handleAnswer} />
+        <input type={"button"} className={styleButtons('true')} value="true" onClick={handleAnswer} />
         <div className="divider divider-horizontal">OR</div>
-        <input type={"button"} className={styleButtons('False')} value="false" onClick={handleAnswer} />
+        <input type={"button"} className={styleButtons('false')} value="false" onClick={handleAnswer} />
       </div>
       }
 
