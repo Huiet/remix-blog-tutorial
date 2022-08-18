@@ -80,19 +80,3 @@ export function ErrorBoundary({ error }) {
   )
 }
 
-// export default function App() {
-//   return (
-//     <html lang="en" className="h-full">
-//       <head>
-//         <Meta />
-//         <Links />
-//       </head>
-//       <body className="h-full dark:bg-bodyDark dark:text-textDark">
-//         <Outlet />
-//         <ScrollRestoration />
-//         <Scripts />
-//         <LiveReload />
-//       </body>
-//     </html>
-//   );
-// }
