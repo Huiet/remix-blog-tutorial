@@ -67,7 +67,7 @@ export default function NewPost() {
   );
 }
 
-
+// @ts-ignore
 export function ErrorBoundary({ error }) {
   console.log(error)
   // todo: make pretty error

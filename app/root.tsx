@@ -38,6 +38,7 @@ export default function App() {
   )
 }
 
+// @ts-ignore
 export function Document({ children }) {
   return (
     <html lang="en">
@@ -57,7 +58,7 @@ export function Document({ children }) {
   )
 }
 
-
+// @ts-ignore
 export function Layout({ children }) {
   return (
     <>
@@ -67,7 +68,7 @@ export function Layout({ children }) {
   )
 }
 
-
+// @ts-ignore
 export function ErrorBoundary({ error }) {
   console.log(error)
   return (
