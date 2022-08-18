@@ -35,7 +35,7 @@ export default function Trivia() {
     <main className="flex justify-center mt-8">
       <Form method={"post"}>
         <div className="flex-col gap-4">
-          <h1 className="text-xl text-center mb-8">Trivia</h1>
+          <h1 className="text-2xl text-center mb-8">Trivia</h1>
           <label className="block text-lg mb-3" htmlFor="category">Choose Your Category</label>
           <select name="category" className="select select-primary">
             {

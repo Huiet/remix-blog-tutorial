@@ -6,7 +6,6 @@ QuestionCard.propTypes = {
   question: PropTypes.string,
   correct_answer: PropTypes.string,
   type: PropTypes.string,
-  difficulty: PropTypes.string,
   answers: PropTypes.arrayOf(PropTypes.string),
   onAnswer: PropTypes.func
 };
@@ -15,12 +14,11 @@ interface questionProps {
   question: string;
   correct_answer: string;
   type: string;
-  difficulty: string;
   answers: string[];
   onAnswer: (correctAnswer: boolean) => any;
 }
 
-function QuestionCard({ question, correct_answer, type, difficulty, onAnswer, answers }: questionProps) {
+function QuestionCard({ question, correct_answer, type, onAnswer, answers }: questionProps) {
 
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   useEffect(() => {
@@ -40,7 +38,6 @@ function QuestionCard({ question, correct_answer, type, difficulty, onAnswer, an
 
   const styleButtons = (value: string) => {
     let btnClass = 'btn ';
-    console.log('mmmm', selectedAnswer);
     if(selectedAnswer) {
       btnClass += 'no-animation cursor-default '
       if(isCorrectAnswer(value)) {
@@ -67,7 +64,7 @@ function QuestionCard({ question, correct_answer, type, difficulty, onAnswer, an
       </h3>
 
       {type === "boolean" &&
-      <div className="flex w-full justify-center gap-4 mt-10">
+      <div className="flex w-full justify-center align-center gap-4 mt-10">
         <input type={"button"} className={styleButtons('true')} value="true" onClick={handleAnswer} />
         <div className="divider divider-horizontal">OR</div>
         <input type={"button"} className={styleButtons('false')} value="false" onClick={handleAnswer} />
