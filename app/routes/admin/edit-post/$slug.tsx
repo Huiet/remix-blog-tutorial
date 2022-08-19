@@ -41,7 +41,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   await updatePost({ title, slug, markdown });
 
-  return redirect("/posts/admin/"+slug);
+  return redirect("/admin/edit-post/");
 };
 
 type LoaderData = { post: Post };

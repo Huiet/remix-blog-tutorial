@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { getPosts } from "~/models/post.server";
 import { json, LoaderFunction } from "@remix-run/node";
 
@@ -32,11 +32,11 @@ export default function EditPost() {
                 </Link>
                 <div>{new Date(post.updatedAt).toLocaleDateString()}</div>
               </div>
-
             </li>
           ))}
         </ul>
       </div>
+      <Outlet />
     </>
   );
 }
